@@ -1,0 +1,29 @@
+erDiagram
+    USERS ||--o{ EMPLOYEES_HISTORY : "changed_by"
+    EMPLOYEES ||--o{ EMPLOYEES_HISTORY : "emp_id (no FK, survives DELETE)"
+
+    USERS {
+        serial user_id PK
+        varchar username UK
+        varchar role "admin / editor / viewer"
+        timestamptz created_at
+    }
+    EMPLOYEES {
+        int emp_id PK
+        varchar name
+        varchar email UK
+        varchar department
+        numeric salary
+    }
+    EMPLOYEES_HISTORY {
+        bigserial history_id PK
+        int emp_id "UK with version_no"
+        int version_no "UK with emp_id"
+        varchar name
+        varchar email
+        varchar department
+        numeric salary
+        varchar operation "INSERT / UPDATE / DELETE"
+        timestamptz changed_at
+        int changed_by FK
+    }
