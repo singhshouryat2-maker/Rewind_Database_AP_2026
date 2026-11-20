@@ -1,0 +1,63 @@
+=== R8 run 1 ===
+Limit  (cost=3168.56..3168.69 rows=50 width=48) (actual time=12.833..12.840 rows=50 loops=1)
+  Buffers: shared hit=1309
+  ->  Sort  (cost=3168.56..3224.27 rows=22281 width=48) (actual time=12.831..12.835 rows=50 loops=1)
+        Sort Key: h.changed_at DESC
+        Sort Method: top-N heapsort  Memory: 32kB
+        Buffers: shared hit=1309
+        ->  Hash Left Join  (cost=1210.02..2428.41 rows=22281 width=48) (actual time=4.695..10.984 rows=22281 loops=1)
+              Hash Cond: ((h.emp_id = prev.emp_id) AND ((h.version_no - 1) = prev.version_no))
+              Buffers: shared hit=1306
+              ->  Seq Scan on employees_history h  (cost=0.00..875.81 rows=22281 width=29) (actual time=0.275..1.578 rows=22281 loops=1)
+                    Buffers: shared hit=653
+              ->  Hash  (cost=875.81..875.81 rows=22281 width=14) (actual time=4.321..4.322 rows=22281 loops=1)
+                    Buckets: 32768  Batches: 1  Memory Usage: 1301kB
+                    Buffers: shared hit=653
+                    ->  Seq Scan on employees_history prev  (cost=0.00..875.81 rows=22281 width=14) (actual time=0.052..2.027 rows=22281 loops=1)
+                          Buffers: shared hit=653
+Planning:
+  Buffers: shared hit=214
+Planning Time: 0.470 ms
+Execution Time: 12.920 ms
+=== R8 run 2 ===
+Limit  (cost=3168.56..3168.69 rows=50 width=48) (actual time=15.576..15.584 rows=50 loops=1)
+  Buffers: shared hit=1309
+  ->  Sort  (cost=3168.56..3224.27 rows=22281 width=48) (actual time=15.575..15.579 rows=50 loops=1)
+        Sort Key: h.changed_at DESC
+        Sort Method: top-N heapsort  Memory: 32kB
+        Buffers: shared hit=1309
+        ->  Hash Left Join  (cost=1210.02..2428.41 rows=22281 width=48) (actual time=5.505..13.336 rows=22281 loops=1)
+              Hash Cond: ((h.emp_id = prev.emp_id) AND ((h.version_no - 1) = prev.version_no))
+              Buffers: shared hit=1306
+              ->  Seq Scan on employees_history h  (cost=0.00..875.81 rows=22281 width=29) (actual time=0.232..1.829 rows=22281 loops=1)
+                    Buffers: shared hit=653
+              ->  Hash  (cost=875.81..875.81 rows=22281 width=14) (actual time=5.142..5.143 rows=22281 loops=1)
+                    Buckets: 32768  Batches: 1  Memory Usage: 1301kB
+                    Buffers: shared hit=653
+                    ->  Seq Scan on employees_history prev  (cost=0.00..875.81 rows=22281 width=14) (actual time=0.068..2.351 rows=22281 loops=1)
+                          Buffers: shared hit=653
+Planning:
+  Buffers: shared hit=214
+Planning Time: 0.585 ms
+Execution Time: 15.648 ms
+=== R8 run 3 ===
+Limit  (cost=3168.56..3168.69 rows=50 width=48) (actual time=16.345..16.353 rows=50 loops=1)
+  Buffers: shared hit=1309
+  ->  Sort  (cost=3168.56..3224.27 rows=22281 width=48) (actual time=16.344..16.348 rows=50 loops=1)
+        Sort Key: h.changed_at DESC
+        Sort Method: top-N heapsort  Memory: 32kB
+        Buffers: shared hit=1309
+        ->  Hash Left Join  (cost=1210.02..2428.41 rows=22281 width=48) (actual time=5.618..13.965 rows=22281 loops=1)
+              Hash Cond: ((h.emp_id = prev.emp_id) AND ((h.version_no - 1) = prev.version_no))
+              Buffers: shared hit=1306
+              ->  Seq Scan on employees_history h  (cost=0.00..875.81 rows=22281 width=29) (actual time=0.260..1.834 rows=22281 loops=1)
+                    Buffers: shared hit=653
+              ->  Hash  (cost=875.81..875.81 rows=22281 width=14) (actual time=5.232..5.232 rows=22281 loops=1)
+                    Buckets: 32768  Batches: 1  Memory Usage: 1301kB
+                    Buffers: shared hit=653
+                    ->  Seq Scan on employees_history prev  (cost=0.00..875.81 rows=22281 width=14) (actual time=0.067..2.360 rows=22281 loops=1)
+                          Buffers: shared hit=653
+Planning:
+  Buffers: shared hit=214
+Planning Time: 0.560 ms
+Execution Time: 16.418 ms

@@ -1,0 +1,66 @@
+=== R10 run 1 ===
+Sort  (cost=996.61..996.61 rows=1 width=37) (actual time=3.262..3.264 rows=0 loops=1)
+  Sort Key: cur.changed_at DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=656
+  ->  Nested Loop  (cost=0.29..996.60 rows=1 width=37) (actual time=3.227..3.228 rows=0 loops=1)
+        Join Filter: (u.user_id = cur.changed_by)
+        Buffers: shared hit=653
+        ->  Nested Loop  (cost=0.29..995.53 rows=1 width=35) (actual time=3.226..3.227 rows=0 loops=1)
+              Buffers: shared hit=653
+              ->  Seq Scan on employees_history cur  (cost=0.00..987.21 rows=1 width=33) (actual time=3.225..3.226 rows=0 loops=1)
+                    Filter: (((operation)::text = 'UPDATE'::text) AND (salary = '0'::numeric))
+                    Rows Removed by Filter: 22281
+                    Buffers: shared hit=653
+              ->  Index Scan using uq_history_version on employees_history prev  (cost=0.29..8.31 rows=1 width=14) (never executed)
+                    Index Cond: ((emp_id = cur.emp_id) AND (version_no = (cur.version_no - 1)))
+                    Filter: (salary > '0'::numeric)
+        ->  Seq Scan on users u  (cost=0.00..1.03 rows=3 width=10) (never executed)
+Planning:
+  Buffers: shared hit=278
+Planning Time: 0.941 ms
+Execution Time: 3.313 ms
+=== R10 run 2 ===
+Sort  (cost=996.61..996.61 rows=1 width=37) (actual time=2.534..2.536 rows=0 loops=1)
+  Sort Key: cur.changed_at DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=656
+  ->  Nested Loop  (cost=0.29..996.60 rows=1 width=37) (actual time=2.509..2.510 rows=0 loops=1)
+        Join Filter: (u.user_id = cur.changed_by)
+        Buffers: shared hit=653
+        ->  Nested Loop  (cost=0.29..995.53 rows=1 width=35) (actual time=2.509..2.510 rows=0 loops=1)
+              Buffers: shared hit=653
+              ->  Seq Scan on employees_history cur  (cost=0.00..987.21 rows=1 width=33) (actual time=2.508..2.508 rows=0 loops=1)
+                    Filter: (((operation)::text = 'UPDATE'::text) AND (salary = '0'::numeric))
+                    Rows Removed by Filter: 22281
+                    Buffers: shared hit=653
+              ->  Index Scan using uq_history_version on employees_history prev  (cost=0.29..8.31 rows=1 width=14) (never executed)
+                    Index Cond: ((emp_id = cur.emp_id) AND (version_no = (cur.version_no - 1)))
+                    Filter: (salary > '0'::numeric)
+        ->  Seq Scan on users u  (cost=0.00..1.03 rows=3 width=10) (never executed)
+Planning:
+  Buffers: shared hit=278
+Planning Time: 0.651 ms
+Execution Time: 2.570 ms
+=== R10 run 3 ===
+Sort  (cost=996.61..996.61 rows=1 width=37) (actual time=3.802..3.804 rows=0 loops=1)
+  Sort Key: cur.changed_at DESC
+  Sort Method: quicksort  Memory: 25kB
+  Buffers: shared hit=656
+  ->  Nested Loop  (cost=0.29..996.60 rows=1 width=37) (actual time=3.763..3.764 rows=0 loops=1)
+        Join Filter: (u.user_id = cur.changed_by)
+        Buffers: shared hit=653
+        ->  Nested Loop  (cost=0.29..995.53 rows=1 width=35) (actual time=3.762..3.763 rows=0 loops=1)
+              Buffers: shared hit=653
+              ->  Seq Scan on employees_history cur  (cost=0.00..987.21 rows=1 width=33) (actual time=3.761..3.762 rows=0 loops=1)
+                    Filter: (((operation)::text = 'UPDATE'::text) AND (salary = '0'::numeric))
+                    Rows Removed by Filter: 22281
+                    Buffers: shared hit=653
+              ->  Index Scan using uq_history_version on employees_history prev  (cost=0.29..8.31 rows=1 width=14) (never executed)
+                    Index Cond: ((emp_id = cur.emp_id) AND (version_no = (cur.version_no - 1)))
+                    Filter: (salary > '0'::numeric)
+        ->  Seq Scan on users u  (cost=0.00..1.03 rows=3 width=10) (never executed)
+Planning:
+  Buffers: shared hit=278
+Planning Time: 1.056 ms
+Execution Time: 3.851 ms

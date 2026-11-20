@@ -1,0 +1,81 @@
+=== R5 run 1 ===
+Sort  (cost=140347.03..140347.31 rows=111 width=28) (actual time=47.140..47.646 rows=9980 loops=1)
+  Sort Key: h.emp_id
+  Sort Method: quicksort  Memory: 956kB
+  Buffers: shared hit=91121
+  ->  Seq Scan on employees_history h  (cost=0.00..140343.26 rows=111 width=28) (actual time=6.949..44.816 rows=9980 loops=1)
+        Filter: (((operation)::text <> 'DELETE'::text) AND (changed_at <= ((CURRENT_DATE - 1) + '17:00:00'::time without time zone)) AND (version_no = (SubPlan 2)))
+        Rows Removed by Filter: 12301
+        Buffers: shared hit=91118
+        SubPlan 2
+          ->  Result  (cost=6.23..6.24 rows=1 width=4) (actual time=0.001..0.001 rows=1 loops=22261)
+                Buffers: shared hit=90465
+                InitPlan 1 (returns $1)
+                  ->  Limit  (cost=0.29..6.23 rows=1 width=4) (actual time=0.001..0.001 rows=1 loops=22261)
+                        Buffers: shared hit=90465
+                        ->  Index Scan Backward using uq_history_version on employees_history h2  (cost=0.29..12.18 rows=2 width=4) (actual time=0.001..0.001 rows=1 loops=22261)
+                              Index Cond: ((emp_id = h.emp_id) AND (version_no IS NOT NULL))
+                              Filter: (changed_at <= ((CURRENT_DATE - 1) + '17:00:00'::time without time zone))
+                              Buffers: shared hit=78624
+Planning:
+  Buffers: shared hit=127
+Planning Time: 0.530 ms
+JIT:
+  Functions: 15
+  Options: Inlining false, Optimization false, Expressions true, Deforming true
+  Timing: Generation 0.510 ms, Inlining 0.000 ms, Optimization 0.381 ms, Emission 6.232 ms, Total 7.123 ms
+Execution Time: 60.422 ms
+=== R5 run 2 ===
+Sort  (cost=140347.03..140347.31 rows=111 width=28) (actual time=63.647..64.464 rows=9980 loops=1)
+  Sort Key: h.emp_id
+  Sort Method: quicksort  Memory: 956kB
+  Buffers: shared hit=91121
+  ->  Seq Scan on employees_history h  (cost=0.00..140343.26 rows=111 width=28) (actual time=9.663..60.740 rows=9980 loops=1)
+        Filter: (((operation)::text <> 'DELETE'::text) AND (changed_at <= ((CURRENT_DATE - 1) + '17:00:00'::time without time zone)) AND (version_no = (SubPlan 2)))
+        Rows Removed by Filter: 12301
+        Buffers: shared hit=91118
+        SubPlan 2
+          ->  Result  (cost=6.23..6.24 rows=1 width=4) (actual time=0.002..0.002 rows=1 loops=22261)
+                Buffers: shared hit=90465
+                InitPlan 1 (returns $1)
+                  ->  Limit  (cost=0.29..6.23 rows=1 width=4) (actual time=0.002..0.002 rows=1 loops=22261)
+                        Buffers: shared hit=90465
+                        ->  Index Scan Backward using uq_history_version on employees_history h2  (cost=0.29..12.18 rows=2 width=4) (actual time=0.001..0.001 rows=1 loops=22261)
+                              Index Cond: ((emp_id = h.emp_id) AND (version_no IS NOT NULL))
+                              Filter: (changed_at <= ((CURRENT_DATE - 1) + '17:00:00'::time without time zone))
+                              Buffers: shared hit=78624
+Planning:
+  Buffers: shared hit=127
+Planning Time: 0.722 ms
+JIT:
+  Functions: 15
+  Options: Inlining false, Optimization false, Expressions true, Deforming true
+  Timing: Generation 0.943 ms, Inlining 0.000 ms, Optimization 0.451 ms, Emission 8.883 ms, Total 10.277 ms
+Execution Time: 78.588 ms
+=== R5 run 3 ===
+Sort  (cost=140347.03..140347.31 rows=111 width=28) (actual time=52.816..53.367 rows=9980 loops=1)
+  Sort Key: h.emp_id
+  Sort Method: quicksort  Memory: 956kB
+  Buffers: shared hit=91121
+  ->  Seq Scan on employees_history h  (cost=0.00..140343.26 rows=111 width=28) (actual time=8.333..50.261 rows=9980 loops=1)
+        Filter: (((operation)::text <> 'DELETE'::text) AND (changed_at <= ((CURRENT_DATE - 1) + '17:00:00'::time without time zone)) AND (version_no = (SubPlan 2)))
+        Rows Removed by Filter: 12301
+        Buffers: shared hit=91118
+        SubPlan 2
+          ->  Result  (cost=6.23..6.24 rows=1 width=4) (actual time=0.002..0.002 rows=1 loops=22261)
+                Buffers: shared hit=90465
+                InitPlan 1 (returns $1)
+                  ->  Limit  (cost=0.29..6.23 rows=1 width=4) (actual time=0.001..0.001 rows=1 loops=22261)
+                        Buffers: shared hit=90465
+                        ->  Index Scan Backward using uq_history_version on employees_history h2  (cost=0.29..12.18 rows=2 width=4) (actual time=0.001..0.001 rows=1 loops=22261)
+                              Index Cond: ((emp_id = h.emp_id) AND (version_no IS NOT NULL))
+                              Filter: (changed_at <= ((CURRENT_DATE - 1) + '17:00:00'::time without time zone))
+                              Buffers: shared hit=78624
+Planning:
+  Buffers: shared hit=127
+Planning Time: 1.915 ms
+JIT:
+  Functions: 15
+  Options: Inlining false, Optimization false, Expressions true, Deforming true
+  Timing: Generation 0.545 ms, Inlining 0.000 ms, Optimization 0.470 ms, Emission 7.546 ms, Total 8.561 ms
+Execution Time: 71.287 ms

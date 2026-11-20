@@ -1,0 +1,30 @@
+=== W3 run 1 ===
+Update on employees  (cost=0.00..288.80 rows=0 width=0) (actual time=30.215..30.216 rows=0 loops=1)
+  Buffers: shared hit=65400 dirtied=44 written=44
+  ->  Seq Scan on employees  (cost=0.00..288.80 rows=9980 width=22) (actual time=0.008..0.975 rows=9980 loops=1)
+        Buffers: shared hit=189
+Planning:
+  Buffers: shared hit=67
+Planning Time: 0.180 ms
+Trigger trg_employees_history: time=220.597 calls=9980
+Execution Time: 251.468 ms
+=== W3 run 2 ===
+Update on employees  (cost=0.00..356.03 rows=0 width=0) (actual time=34.112..34.113 rows=0 loops=1)
+  Buffers: shared hit=65576 dirtied=38 written=38
+  ->  Seq Scan on employees  (cost=0.00..356.03 rows=12303 width=22) (actual time=0.009..1.733 rows=9980 loops=1)
+        Buffers: shared hit=233
+Planning:
+  Buffers: shared hit=67
+Planning Time: 0.241 ms
+Trigger trg_employees_history: time=247.827 calls=9980
+Execution Time: 282.586 ms
+=== W3 run 3 ===
+Update on employees  (cost=0.00..414.10 rows=0 width=0) (actual time=25.986..25.987 rows=0 loops=1)
+  Buffers: shared hit=55696 dirtied=26 written=26
+  ->  Seq Scan on employees  (cost=0.00..414.10 rows=14310 width=22) (actual time=0.008..1.634 rows=9980 loops=1)
+        Buffers: shared hit=271
+Planning:
+  Buffers: shared hit=67
+Planning Time: 0.252 ms
+Trigger trg_employees_history: time=266.210 calls=9980
+Execution Time: 292.902 ms

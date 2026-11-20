@@ -1,0 +1,66 @@
+=== R14 run 1 ===
+Merge Left Join  (cost=3436.60..3822.71 rows=10000 width=65) (actual time=11.800..17.092 rows=10000 loops=1)
+  Merge Cond: (employees_history.emp_id = e.emp_id)
+  Buffers: shared hit=842
+  ->  Unique  (cost=2484.89..2596.30 rows=10000 width=27) (actual time=8.055..10.795 rows=10000 loops=1)
+        Buffers: shared hit=653
+        ->  Sort  (cost=2484.89..2540.59 rows=22281 width=27) (actual time=8.054..8.973 rows=22281 loops=1)
+              Sort Key: employees_history.emp_id, employees_history.version_no DESC
+              Sort Method: quicksort  Memory: 1987kB
+              Buffers: shared hit=653
+              ->  Seq Scan on employees_history  (cost=0.00..875.81 rows=22281 width=27) (actual time=0.289..2.501 rows=22281 loops=1)
+                    Buffers: shared hit=653
+  ->  Sort  (cost=951.71..976.66 rows=9980 width=15) (actual time=3.738..4.201 rows=9980 loops=1)
+        Sort Key: e.emp_id
+        Sort Method: quicksort  Memory: 814kB
+        Buffers: shared hit=189
+        ->  Seq Scan on employees e  (cost=0.00..288.80 rows=9980 width=15) (actual time=0.012..1.594 rows=9980 loops=1)
+              Buffers: shared hit=189
+Planning:
+  Buffers: shared hit=165
+Planning Time: 0.433 ms
+Execution Time: 17.590 ms
+=== R14 run 2 ===
+Merge Left Join  (cost=3436.60..3822.71 rows=10000 width=65) (actual time=10.848..15.896 rows=10000 loops=1)
+  Merge Cond: (employees_history.emp_id = e.emp_id)
+  Buffers: shared hit=842
+  ->  Unique  (cost=2484.89..2596.30 rows=10000 width=27) (actual time=8.025..10.631 rows=10000 loops=1)
+        Buffers: shared hit=653
+        ->  Sort  (cost=2484.89..2540.59 rows=22281 width=27) (actual time=8.023..8.942 rows=22281 loops=1)
+              Sort Key: employees_history.emp_id, employees_history.version_no DESC
+              Sort Method: quicksort  Memory: 1987kB
+              Buffers: shared hit=653
+              ->  Seq Scan on employees_history  (cost=0.00..875.81 rows=22281 width=27) (actual time=0.283..2.501 rows=22281 loops=1)
+                    Buffers: shared hit=653
+  ->  Sort  (cost=951.71..976.66 rows=9980 width=15) (actual time=2.816..3.239 rows=9980 loops=1)
+        Sort Key: e.emp_id
+        Sort Method: quicksort  Memory: 814kB
+        Buffers: shared hit=189
+        ->  Seq Scan on employees e  (cost=0.00..288.80 rows=9980 width=15) (actual time=0.011..1.032 rows=9980 loops=1)
+              Buffers: shared hit=189
+Planning:
+  Buffers: shared hit=165
+Planning Time: 0.563 ms
+Execution Time: 16.366 ms
+=== R14 run 3 ===
+Merge Left Join  (cost=3436.60..3822.71 rows=10000 width=65) (actual time=10.844..16.077 rows=10000 loops=1)
+  Merge Cond: (employees_history.emp_id = e.emp_id)
+  Buffers: shared hit=842
+  ->  Unique  (cost=2484.89..2596.30 rows=10000 width=27) (actual time=8.023..10.711 rows=10000 loops=1)
+        Buffers: shared hit=653
+        ->  Sort  (cost=2484.89..2540.59 rows=22281 width=27) (actual time=8.022..9.068 rows=22281 loops=1)
+              Sort Key: employees_history.emp_id, employees_history.version_no DESC
+              Sort Method: quicksort  Memory: 1987kB
+              Buffers: shared hit=653
+              ->  Seq Scan on employees_history  (cost=0.00..875.81 rows=22281 width=27) (actual time=0.228..2.455 rows=22281 loops=1)
+                    Buffers: shared hit=653
+  ->  Sort  (cost=951.71..976.66 rows=9980 width=15) (actual time=2.812..3.278 rows=9980 loops=1)
+        Sort Key: e.emp_id
+        Sort Method: quicksort  Memory: 814kB
+        Buffers: shared hit=189
+        ->  Seq Scan on employees e  (cost=0.00..288.80 rows=9980 width=15) (actual time=0.011..1.023 rows=9980 loops=1)
+              Buffers: shared hit=189
+Planning:
+  Buffers: shared hit=165
+Planning Time: 0.427 ms
+Execution Time: 16.580 ms

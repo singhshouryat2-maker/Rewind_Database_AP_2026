@@ -1,0 +1,33 @@
+=== W2 run 1 ===
+Update on employees  (cost=0.29..8.31 rows=0 width=0) (actual time=0.106..0.106 rows=0 loops=1)
+  Buffers: shared hit=15
+  ->  Index Scan using employees_pkey on employees  (cost=0.29..8.31 rows=1 width=22) (actual time=0.016..0.016 rows=1 loops=1)
+        Index Cond: (emp_id = 101)
+        Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=84
+Planning Time: 0.312 ms
+Trigger trg_employees_history: time=1.852 calls=1
+Execution Time: 2.023 ms
+=== W2 run 2 ===
+Update on employees  (cost=0.29..8.31 rows=0 width=0) (actual time=0.108..0.108 rows=0 loops=1)
+  Buffers: shared hit=15
+  ->  Index Scan using employees_pkey on employees  (cost=0.29..8.31 rows=1 width=22) (actual time=0.017..0.017 rows=1 loops=1)
+        Index Cond: (emp_id = 101)
+        Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=84
+Planning Time: 0.272 ms
+Trigger trg_employees_history: time=1.667 calls=1
+Execution Time: 1.828 ms
+=== W2 run 3 ===
+Update on employees  (cost=0.29..8.31 rows=0 width=0) (actual time=0.090..0.091 rows=0 loops=1)
+  Buffers: shared hit=15
+  ->  Index Scan using employees_pkey on employees  (cost=0.29..8.31 rows=1 width=22) (actual time=0.016..0.017 rows=1 loops=1)
+        Index Cond: (emp_id = 101)
+        Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=84
+Planning Time: 0.275 ms
+Trigger trg_employees_history: time=1.477 calls=1
+Execution Time: 1.619 ms

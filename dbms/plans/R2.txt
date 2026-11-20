@@ -1,0 +1,33 @@
+=== R2 run 1 ===
+Sort  (cost=951.71..976.66 rows=9980 width=28) (actual time=4.008..4.589 rows=9980 loops=1)
+  Sort Key: emp_id
+  Sort Method: quicksort  Memory: 956kB
+  Buffers: shared hit=192
+  ->  Seq Scan on employees  (cost=0.00..288.80 rows=9980 width=28) (actual time=0.007..1.501 rows=9980 loops=1)
+        Buffers: shared hit=189
+Planning:
+  Buffers: shared hit=98
+Planning Time: 0.291 ms
+Execution Time: 5.091 ms
+=== R2 run 2 ===
+Sort  (cost=951.71..976.66 rows=9980 width=28) (actual time=3.995..4.733 rows=9980 loops=1)
+  Sort Key: emp_id
+  Sort Method: quicksort  Memory: 956kB
+  Buffers: shared hit=192
+  ->  Seq Scan on employees  (cost=0.00..288.80 rows=9980 width=28) (actual time=0.008..1.499 rows=9980 loops=1)
+        Buffers: shared hit=189
+Planning:
+  Buffers: shared hit=98
+Planning Time: 0.352 ms
+Execution Time: 5.286 ms
+=== R2 run 3 ===
+Sort  (cost=951.71..976.66 rows=9980 width=28) (actual time=3.270..3.818 rows=9980 loops=1)
+  Sort Key: emp_id
+  Sort Method: quicksort  Memory: 956kB
+  Buffers: shared hit=192
+  ->  Seq Scan on employees  (cost=0.00..288.80 rows=9980 width=28) (actual time=0.006..1.172 rows=9980 loops=1)
+        Buffers: shared hit=189
+Planning:
+  Buffers: shared hit=98
+Planning Time: 0.255 ms
+Execution Time: 4.320 ms

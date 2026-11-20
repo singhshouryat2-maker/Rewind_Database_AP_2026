@@ -1,0 +1,33 @@
+=== W4 run 1 ===
+Delete on employees  (cost=0.29..8.30 rows=0 width=0) (actual time=0.068..0.068 rows=0 loops=1)
+  Buffers: shared hit=7
+  ->  Index Scan using employees_pkey on employees  (cost=0.29..8.30 rows=1 width=6) (actual time=0.039..0.050 rows=1 loops=1)
+        Index Cond: (emp_id = 102)
+        Buffers: shared hit=5
+Planning:
+  Buffers: shared hit=81
+Planning Time: 0.385 ms
+Trigger trg_employees_history: time=1.680 calls=1
+Execution Time: 1.804 ms
+=== W4 run 2 ===
+Delete on employees  (cost=0.29..8.30 rows=0 width=0) (actual time=0.042..0.042 rows=0 loops=1)
+  Buffers: shared hit=5
+  ->  Index Scan using employees_pkey on employees  (cost=0.29..8.30 rows=1 width=6) (actual time=0.022..0.023 rows=1 loops=1)
+        Index Cond: (emp_id = 102)
+        Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=81
+Planning Time: 0.289 ms
+Trigger trg_employees_history: time=1.594 calls=1
+Execution Time: 1.686 ms
+=== W4 run 3 ===
+Delete on employees  (cost=0.29..8.30 rows=0 width=0) (actual time=0.032..0.032 rows=0 loops=1)
+  Buffers: shared hit=5
+  ->  Index Scan using employees_pkey on employees  (cost=0.29..8.30 rows=1 width=6) (actual time=0.014..0.015 rows=1 loops=1)
+        Index Cond: (emp_id = 102)
+        Buffers: shared hit=3
+Planning:
+  Buffers: shared hit=81
+Planning Time: 0.238 ms
+Trigger trg_employees_history: time=1.451 calls=1
+Execution Time: 1.525 ms

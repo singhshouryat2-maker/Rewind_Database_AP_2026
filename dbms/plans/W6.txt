@@ -1,0 +1,96 @@
+=== W6 run 1 ===
+Insert on employees  (cost=0.00..229546.23 rows=0 width=0) (actual time=31.082..31.084 rows=0 loops=1)
+  Buffers: shared hit=7233 dirtied=1 written=1
+  ->  Nested Loop Anti Join  (cost=0.00..229546.23 rows=1 width=48) (actual time=9.101..30.591 rows=20 loops=1)
+        Join Filter: (e.emp_id = h.emp_id)
+        Rows Removed by Join Filter: 199600
+        Buffers: shared hit=7083
+        ->  Seq Scan on employees_history h  (cost=0.00..228896.37 rows=1 width=48) (actual time=7.747..8.826 rows=20 loops=1)
+              Filter: (((operation)::text = 'DELETE'::text) AND (version_no = (SubPlan 2)))
+              Rows Removed by Filter: 22261
+              Buffers: shared hit=1128
+              SubPlan 2
+                ->  Result  (cost=6.23..6.24 rows=1 width=4) (actual time=0.009..0.009 rows=1 loops=20)
+                      Buffers: shared hit=60
+                      InitPlan 1 (returns $1)
+                        ->  Limit  (cost=0.29..6.23 rows=1 width=4) (actual time=0.007..0.007 rows=1 loops=20)
+                              Buffers: shared hit=60
+                              ->  Index Only Scan Backward using uq_history_version on employees_history  (cost=0.29..12.16 rows=2 width=4) (actual time=0.006..0.006 rows=1 loops=20)
+                                    Index Cond: ((emp_id = h.emp_id) AND (version_no IS NOT NULL))
+                                    Heap Fetches: 20
+                                    Buffers: shared hit=60
+        ->  Seq Scan on employees e  (cost=0.00..453.83 rows=15683 width=4) (actual time=0.002..0.655 rows=9980 loops=20)
+              Buffers: shared hit=5955
+Planning:
+  Buffers: shared hit=266
+Planning Time: 0.712 ms
+Trigger trg_employees_history: time=2.068 calls=20
+JIT:
+  Functions: 14
+  Options: Inlining false, Optimization false, Expressions true, Deforming true
+  Timing: Generation 0.417 ms, Inlining 0.000 ms, Optimization 0.358 ms, Emission 5.548 ms, Total 6.322 ms
+Execution Time: 45.408 ms
+=== W6 run 2 ===
+Insert on employees  (cost=0.00..229548.43 rows=0 width=0) (actual time=36.227..36.230 rows=0 loops=1)
+  Buffers: shared hit=7258
+  ->  Nested Loop Anti Join  (cost=0.00..229548.43 rows=1 width=48) (actual time=14.144..35.744 rows=20 loops=1)
+        Join Filter: (e.emp_id = h.emp_id)
+        Rows Removed by Join Filter: 199600
+        Buffers: shared hit=7108
+        ->  Seq Scan on employees_history h  (cost=0.00..228896.37 rows=1 width=48) (actual time=12.206..13.323 rows=20 loops=1)
+              Filter: (((operation)::text = 'DELETE'::text) AND (version_no = (SubPlan 2)))
+              Rows Removed by Filter: 22261
+              Buffers: shared hit=1148
+              SubPlan 2
+                ->  Result  (cost=6.23..6.24 rows=1 width=4) (actual time=0.011..0.011 rows=1 loops=20)
+                      Buffers: shared hit=80
+                      InitPlan 1 (returns $1)
+                        ->  Limit  (cost=0.29..6.23 rows=1 width=4) (actual time=0.009..0.009 rows=1 loops=20)
+                              Buffers: shared hit=80
+                              ->  Index Only Scan Backward using uq_history_version on employees_history  (cost=0.29..12.16 rows=2 width=4) (actual time=0.008..0.008 rows=1 loops=20)
+                                    Index Cond: ((emp_id = h.emp_id) AND (version_no IS NOT NULL))
+                                    Heap Fetches: 40
+                                    Buffers: shared hit=80
+        ->  Seq Scan on employees e  (cost=0.00..455.36 rows=15736 width=4) (actual time=0.002..0.673 rows=9980 loops=20)
+              Buffers: shared hit=5960
+Planning:
+  Buffers: shared hit=266
+Planning Time: 0.763 ms
+Trigger trg_employees_history: time=1.939 calls=20
+JIT:
+  Functions: 14
+  Options: Inlining false, Optimization false, Expressions true, Deforming true
+  Timing: Generation 0.568 ms, Inlining 0.000 ms, Optimization 0.449 ms, Emission 9.011 ms, Total 10.027 ms
+Execution Time: 53.246 ms
+=== W6 run 3 ===
+Insert on employees  (cost=0.00..229548.43 rows=0 width=0) (actual time=31.514..31.516 rows=0 loops=1)
+  Buffers: shared hit=7280
+  ->  Nested Loop Anti Join  (cost=0.00..229548.43 rows=1 width=48) (actual time=9.269..31.044 rows=20 loops=1)
+        Join Filter: (e.emp_id = h.emp_id)
+        Rows Removed by Join Filter: 199600
+        Buffers: shared hit=7108
+        ->  Seq Scan on employees_history h  (cost=0.00..228896.37 rows=1 width=48) (actual time=7.924..9.065 rows=20 loops=1)
+              Filter: (((operation)::text = 'DELETE'::text) AND (version_no = (SubPlan 2)))
+              Rows Removed by Filter: 22261
+              Buffers: shared hit=1148
+              SubPlan 2
+                ->  Result  (cost=6.23..6.24 rows=1 width=4) (actual time=0.012..0.012 rows=1 loops=20)
+                      Buffers: shared hit=80
+                      InitPlan 1 (returns $1)
+                        ->  Limit  (cost=0.29..6.23 rows=1 width=4) (actual time=0.010..0.010 rows=1 loops=20)
+                              Buffers: shared hit=80
+                              ->  Index Only Scan Backward using uq_history_version on employees_history  (cost=0.29..12.16 rows=2 width=4) (actual time=0.008..0.008 rows=1 loops=20)
+                                    Index Cond: ((emp_id = h.emp_id) AND (version_no IS NOT NULL))
+                                    Heap Fetches: 40
+                                    Buffers: shared hit=80
+        ->  Seq Scan on employees e  (cost=0.00..455.36 rows=15736 width=4) (actual time=0.001..0.656 rows=9980 loops=20)
+              Buffers: shared hit=5960
+Planning:
+  Buffers: shared hit=266
+Planning Time: 0.580 ms
+Trigger trg_employees_history: time=1.981 calls=20
+JIT:
+  Functions: 14
+  Options: Inlining false, Optimization false, Expressions true, Deforming true
+  Timing: Generation 0.413 ms, Inlining 0.000 ms, Optimization 0.336 ms, Emission 5.723 ms, Total 6.472 ms
+Execution Time: 45.700 ms
